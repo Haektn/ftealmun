@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coming Soon</title>
   <style>
-    :root { --bg1: #4b0082; --bg2: #8a2be2; --fg: #f5f3ff; --accent: #c084fc; }
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600&display=swap');
+
+    :root { --bg1: #2e003e; --bg2: #4b006e; --fg: #f5f3ff; --accent: #a855f7; }
 
     html, body { height: 100%; margin: 0; }
     body {
@@ -14,16 +16,17 @@
       align-items: center;
       min-height: 100%;
       background:
-        radial-gradient(1200px 800px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
+        radial-gradient(1000px 700px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2) 90%);
       color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
       text-align: center;
     }
 
     h1 {
+      font-family: 'Bodoni Moda', serif;
       font-size: clamp(2rem, 6vw, 5rem);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       margin: 0 0 0.5rem;
     }
