@@ -5,158 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coming Soon</title>
   <style>
-    :root { --bg: #0f172a; --fg: #e2e8f0; --accent: #22d3ee; }
-    @media (prefers-color-scheme: light) {
-      :root { --bg: #f8fafc; --fg: #0f172a; --accent: #0ea5e9; }
-    }
-
-    html, body { height: 100%; }
     body {
       margin: 0;
-      display: grid;
-      place-items: center;
-      min-height: 100%;
-      background:
-        radial-gradient(1200px 800px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
-        linear-gradient(180deg, var(--bg), #020617 90%);
-      color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6a0dad, #8a2be2);
+      color: white;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
     }
-
-    main { text-align: center; padding: 2rem; }
 
     h1 {
       font-size: clamp(2rem, 6vw, 5rem);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin: 0 0 0.5rem;
-    }
-
-    p { margin: 0; opacity: 0.85; }
-
-    .dots::after { content: ""; animation: ellipsis steps(4, end) 1.2s infinite; }
-    @keyframes ellipsis {
-      0%, 100% { content: ""; }
-      25% { content: "."; }
-      50% { content: ".."; }
-      75% { content: "..."; }
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      padding: 0.4rem 0.75rem;
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      opacity: 0.85;
-      margin-bottom: 0.75rem;
-    }
-
-    footer {
-      position: fixed;
-      inset-inline: 0;
-      bottom: 1rem;
-      text-align: center;
-      font-size: 0.8rem;
-      opacity: 0.6;
-    }
-  </style>
-</head>
-<body>
-  <main role="main" aria-label="Coming soon">
-    <div class="badge" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 11h5v2h-7V6h2Z"/></svg>
-      Under construction
-    </div>
-    <h1>Coming&nbsp;Soon<span class="dots" aria-hidden="true"></span></h1>
-    <p>We’re crafting something great. Check back later.</p>
-  </main>
-  <footer>© <span id="year"></span></footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coming Soon</title>
-  <style>
-    :root { --bg: #0f172a; --fg: #e2e8f0; --accent: #22d3ee; }
-    @media (prefers-color-scheme: light) {
-      :root { --bg: #f8fafc; --fg: #0f172a; --accent: #0ea5e9; }
-    }
-
-    html, body { height: 100%; }
-    body {
       margin: 0;
-      display: grid;
-      place-items: center;
-      min-height: 100%;
-      background:
-        radial-gradient(1200px 800px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
-        linear-gradient(180deg, var(--bg), #020617 90%);
-      color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    }
-
-    main { text-align: center; padding: 2rem; }
-
-    h1 {
-      font-size: clamp(2rem, 6vw, 5rem);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin: 0 0 0.5rem;
-    }
-
-    p { margin: 0; opacity: 0.85; }
-
-    .dots::after { content: ""; animation: ellipsis steps(4, end) 1.2s infinite; }
-    @keyframes ellipsis {
-      0%, 100% { content: ""; }
-      25% { content: "."; }
-      50% { content: ".."; }
-      75% { content: "..."; }
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      padding: 0.4rem 0.75rem;
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      opacity: 0.85;
-      margin-bottom: 0.75rem;
-    }
-
-    footer {
-      position: fixed;
-      inset-inline: 0;
-      bottom: 1rem;
-      text-align: center;
-      font-size: 0.8rem;
-      opacity: 0.6;
     }
   </style>
 </head>
 <body>
-  <main role="main" aria-label="Coming soon">
-    <div class="badge" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 11h5v2h-7V6h2Z"/></svg>
-      Under construction
-    </div>
-    <h1>Coming&nbsp;Soon<span class="dots" aria-hidden="true"></span></h1>
-    <p>We’re crafting something great. Check back later.</p>
-  </main>
-  <footer>© <span id="year"></span></footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <h1>Coming Soon</h1>
 </body>
 </html>
