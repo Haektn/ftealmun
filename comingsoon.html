@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming Soon - FTEALMUN'25</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600&display=swap');
+
+    :root { --bg1: #2e003e; --bg2: #4b006e; --fg: #f5f3ff; --accent: #a855f7; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      color: var(--fg);
+      background:
+        radial-gradient(1000px 700px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2) 90%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Navbar */
+    header {
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(29, 0, 58, 0.95);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    header .logo { display: flex; align-items: center; gap: 0.75rem; }
+    header .logo img { width: 48px; height: 48px; }
+    header .logo span { font-family: 'Bodoni Moda', serif; font-weight: 600; font-size: 1.5rem; color: var(--accent); }
+    nav { display: flex; gap: 1rem; }
+    nav a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    nav a:hover { background-color: rgba(168,85,247,0.2); color: #fff; }
+
+    /* Page Content */
+    main {
+      margin-top: 100px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-family: 'Bodoni Moda', serif;
+      font-size: clamp(2rem, 6vw, 5rem);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      opacity: 0.85;
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .dots::after { content: ""; animation: ellipsis steps(4, end) 1.2s infinite; }
+    @keyframes ellipsis {
+      0%, 100% { content: ""; }
+      25% { content: "."; }
+      50% { content: ".."; }
+      75% { content: "..."; }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin: 1rem 0;
+    }
+
+    /* Mobile */
+    @media(max-width:768px){
+      nav { flex-direction: column; gap: 0; }
+      nav a { padding: 0.75rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="./FTEALMUNLOGO.png" alt="FTEALMUN Logo">
+      <span>FTEALMUN'25</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="conference.html">Conference</a>
+      <a href="committees.html">Committees</a>
+      <a href="apply.html">Apply Now</a>
+    </nav>
+  </header>
+
+  <main role="main" aria-label="Coming soon">
+    <h1>Coming&nbsp;Soon<span class="dots" aria-hidden="true"></span></h1>
+    <p>Something remarkable is on the way. Stay tuned.</p>
+  </main>
+
+  <footer>FTEALMUN'25 © 2025. All Rights Reserved.</footer>
+</body>
+</html>

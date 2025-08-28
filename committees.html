@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Committees - FTEALMUN'25</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<style>
+/* General */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(rgba(18,11,31,0.9), rgba(18,11,31,0.9)), url('./IMG_7995.JPG') center/cover no-repeat;
+  color: #eaeaea;
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+header {
+  position: fixed; top:0; left:0; width:100%; z-index:2000;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.5rem 2rem; background-color:#1a0f2b; box-shadow:0 2px 8px rgba(0,0,0,0.4); flex-wrap:wrap;
+}
+header .logo { display:flex; align-items:center; gap:0.75rem; cursor:pointer; }
+header .logo img { width:48px; height:48px; }
+header .logo span { font-family:'Playfair Display', serif; font-weight:600; font-size:1.5rem; color:#b69df8; letter-spacing:0.05em; }
+nav { display:flex; gap:1rem; margin-right:0.5rem; }
+nav a { padding:0.5rem 1rem; border-radius:0.5rem; transition:all 0.3s ease; font-family:'Montserrat',sans-serif; font-weight:500; text-decoration:none; color:#eaeaea; }
+nav a:hover { background-color: rgba(182,157,248,0.2); color:#fff; }
+.hamburger { display:none; flex-direction:column; justify-content:space-between; width:28px; height:22px; cursor:pointer; z-index:2001; }
+.hamburger div { height:3px; border-radius:2px; background-color:#b69df8; transition: all 0.3s ease; }
+.hamburger.active div:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.active div:nth-child(2) { opacity:0; }
+.hamburger.active div:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+/* Page Title */
+.page-title { text-align:center; margin-top:120px; font-family:'Playfair Display', serif; font-size:3rem; color:#e3d4ff; margin-bottom:2rem; }
+
+/* Committee Buttons */
+.committee-container { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; padding:1rem 2rem; }
+.committee-box {
+  width:180px; aspect-ratio:1080/1350; border-radius:1rem; overflow:hidden;
+  background-size:cover; background-position:center; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  position:relative; transition: transform 0.3s ease;
+}
+.committee-box:hover { transform:scale(1.05);}
+.committee-box span {
+  position:absolute; bottom:0; width:100%; text-align:center;
+  background: rgba(0,0,0,0.35); color:#fff; font-family:'Playfair Display', serif; font-weight:600; font-size:1.1rem; padding:0.5rem 0;
+}
+
+/* Overlay */
+.overlay {
+  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);
+  display:none; justify-content:center; align-items:center; z-index:3000;
+}
+.overlay-content {
+  width:90%; max-width:800px; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px);
+  border-radius:1rem; padding:2rem; color:#fff; position:relative;
+  transform: translateY(20px) scale(0.9); opacity:0; transition: all 0.4s ease;
+}
+.overlay.show .overlay-content { transform: translateY(0) scale(1); opacity:1; }
+
+/* Close Button */
+.overlay .close-btn {
+  position:absolute; top:1rem; right:1rem; font-size:1.5rem; color:#fff; cursor:pointer;
+}
+
+/* Overlay Headings */
+.overlay-content h2 { font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:0.5rem; }
+.overlay-content h3 { font-family:'Playfair Display', serif; font-size:1.2rem; color:#c3b3f9; margin-bottom:1rem; font-weight:500; }
+
+/* Overlay Buttons */
+.overlay-content button {
+  margin-top:0.75rem; padding:0.5rem 1rem; border:none; border-radius:0.5rem; 
+  background:#7c4dff; color:#fff; cursor:pointer; transition:all 0.3s ease; font-family:'Playfair Display', serif; font-weight:600;
+}
+.overlay-content button:hover { background:#5c37e0; }
+
+/* Footer */
+footer {
+  background-color: #1a0f2b; color: #dcd6ff; padding: 3rem 1rem 2rem 1rem; text-align: center; margin-top: 5rem;
+}
+footer .footer-container { max-width:900px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:center; gap:5rem; }
+footer .footer-container div { flex:1; min-width:180px; }
+footer h3 { font-family:'Playfair Display', serif; font-weight:600; margin-bottom:0.5rem; }
+footer a { color:#b69df8; display:block; margin:0.5rem 0; transition:all 0.3s ease; text-decoration:none; }
+footer a:hover { color:#fff; }
+footer p.copy { margin-top:4rem; font-size:0.9rem; color:#aaa; }
+
+/* Mobile */
+@media(max-width:768px){
+  header{flex-direction:row; justify-content:space-between; align-items:center; padding:1rem 1.5rem;}
+  header .logo { flex:1; justify-content:flex-start; }
+  header .logo span { position:absolute; left:50%; transform:translateX(-50%); }
+
+  .hamburger { display:flex; }
+
+  nav { display:flex; flex-direction:column; width:100%; position:absolute; top:100%; left:0; background-color:#1a0f2b; overflow:hidden; max-height:0; opacity:0; transform:translateY(-20px); transition:max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease; z-index:1500; box-shadow:0 6px 12px rgba(0,0,0,0.3);}
+  nav.show { max-height:500px; opacity:1; transform:translateY(0);}
+  nav a { padding:1rem 0; text-align:center; font-size:1.1rem; color:#eaeaea; }
+  .committee-container { flex-direction:column; align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="./FTEALMUNLOGO.png" alt="FTEALMUN Logo">
+    <span>FTEALMUN'25</span>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
+  <nav id="navbar">
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conference</a>
+    <a href="committees.html">Committees</a>
+    <a href="apply.html">Apply Now</a>
+  </nav>
+</header>
+
+<h1 class="page-title">Committees</h1>
+
+<div class="committee-container">
+  <div class="committee-box" style="background:url('DISEC.jpg') center/cover no-repeat;" onclick="openOverlay('disec')"><span>GA:1 DISEC</span></div>
+  <div class="committee-box" style="background:url('LEGAL.jpg') center/cover no-repeat;" onclick="openOverlay('legal')"><span>GA:6 LEGAL</span></div>
+  <div class="committee-box" style="background:url('unwomen.jpg') center/cover no-repeat;" onclick="openOverlay('unwomen')"><span>UN Women</span></div>
+  <div class="committee-box" style="background:url('UNHRCC.jpg') center/cover no-repeat;" onclick="openOverlay('unhrc')"><span>UNHRC</span></div>
+  <div class="committee-box" style="background:url('HOC.jpg') center/cover no-repeat;" onclick="openOverlay('hoc')"><span>House of Commons</span></div>
+  <div class="committee-box" style="background:url('HUNSC.jpg') center/cover no-repeat;" onclick="openOverlay('hunsc')"><span>H:UNSC</span></div>
+  <div class="committee-box" style="background:url('HOIC.jpg') center/cover no-repeat;" onclick="openOverlay('hoic')"><span>H:OIC</span></div>
+  <div class="committee-box" style="background:url('HCCC.jpg') center/cover no-repeat;" onclick="openOverlay('hcc')"><span>HCC</span></div>
+  <div class="committee-box" style="background:url('HJCC.jpg') center/cover no-repeat;" onclick="openOverlay('hjcc')"><span>H:JCC</span></div>
+  <div class="committee-box" style="background:url('B99.jpg') center/cover no-repeat;" onclick="openOverlay('b99')"><span>Brooklyn Nine-Nine</span></div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <span class="close-btn" onclick="closeOverlay()">×</span>
+    <h2 id="overlay-title">Committee Title</h2>
+    <h3 id="overlay-subtitle">Agenda Item</h3>
+    <p id="overlay-desc">Full description goes here...</p>
+    <button id="sg-btn" onclick="window.location.href='https://example.com/study-guide'">Study Guide</button>
+    <button id="rop-btn" style="display:none;" onclick="window.location.href='https://example.com/rop'">Rules of Procedure</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="conference.html">Conference</a>
+      <a href="committees.html">Committees</a>
+      <a href="apply.html">Apply Now</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:ftealmunpublicrelations@gmail.com">ftealmunpublicrelations@gmail.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/ftealmun" target="_blank">@ftealmun</a></p>
+    </div>
+  </div>
+  <p class="copy">FTEALMUN'25 © 2025. All Rights Reserved.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  const navbar = document.getElementById('navbar');
+  const hamburger = document.querySelector('.hamburger');
+  navbar.classList.toggle('show');
+  hamburger.classList.toggle('active');
+}
+
+// Overlay logic remains unchanged
+function openOverlay(committee){
+  const overlay = document.getElementById('overlay');
+  overlay.style.display='flex';
+  
+  const title = document.getElementById('overlay-title');
+  const subtitle = document.getElementById('overlay-subtitle');
+  const desc = document.getElementById('overlay-desc');
+  const sgBtn = document.getElementById('sg-btn');
+  const ropBtn = document.getElementById('rop-btn');
+
+  if(committee==='disec'){
+    title.innerText='GA:1 DISEC';
+    subtitle.innerText='Formulating methods to regulate autonomous weapons systems to combat violations of international law and the escalation of an arms race';
+    desc.innerText=`The General Assembly First Committee (DISEC) serves as the primary forum for the discussion of global disarmament, security, and arms control. In this session, delegates will address the growing challenge posed by autonomous weapons systems (AWS), including drones and AI-driven military technologies, which present unprecedented threats to international humanitarian law and global stability. With limited regulation, AWS risk undermining accountability in armed conflict and accelerating an international arms race.
+
+Member states will be tasked with formulating cooperative frameworks that balance national security interests with global peace. The debate will explore questions of legality, ethics, and military necessity, while seeking viable paths for international regulation, monitoring, and enforcement to prevent widespread misuse of autonomous weapons.`;
+    ropBtn.style.display='none';
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='legal'){
+    title.innerText='GA:6 LEGAL';
+    subtitle.innerText='Defining Legal Accountability for AI-Generated Content and Misinformation';
+    desc.innerText=`The Sixth Committee of the General Assembly, tasked with legal matters, now confronts the rapidly evolving challenge of artificial intelligence in shaping global discourse. AI-generated misinformation, from deepfakes to manipulated text, has already influenced elections, international relations, and social stability. The lack of clear legal accountability mechanisms has made it difficult for states, corporations, and individuals to navigate responsibility for the spread of harmful AI-driven content.
+
+Delegates will debate the creation of international legal norms to hold actors accountable for AI-generated misinformation while upholding freedoms of expression and innovation. The session will require careful consideration of liability, enforcement across jurisdictions, and the ethical responsibilities of both developers and users of AI technologies.`;
+    ropBtn.style.display='none';
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='unwomen'){
+    title.innerText='UN Women';
+    subtitle.innerText='Ensuring and Advancing Women\'s Rights in the Digital Age';
+    desc.innerText=`UN Women focuses on promoting gender equality and the empowerment of women, and in this agenda, the committee will explore the intersection between gender rights and the digital landscape. The rapid expansion of technology has created both opportunities and threats: online platforms can amplify women’s voices globally, but also expose them to harassment, discrimination, and exclusion. Ensuring safe and equitable digital spaces is now essential for gender justice.
+
+Delegates will assess how governments, private actors, and civil society can work together to protect women’s rights online. Issues of cyber-harassment, access to digital resources, participation in the tech sector, and closing the gender digital divide will be central to discussions. The goal will be to propose international strategies that make the digital age inclusive and empowering for all women.`;
+    ropBtn.style.display='inline-block';
+    ropBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='unhrc'){
+    title.innerText='UNHRC';
+    subtitle.innerText='Examining the human rights implications of the wrongful detention of prisoners in South America';
+    desc.innerText=`The Human Rights Council (UNHRC) addresses pressing violations of fundamental freedoms worldwide. This session focuses on wrongful detentions in South America, where political instability, corruption, and weak judicial systems have led to the arbitrary imprisonment of activists, journalists, and ordinary citizens. These detentions undermine rule of law, weaken democratic institutions, and perpetuate cycles of abuse.
+
+Delegates will examine the human rights dimensions of these detentions, considering questions of accountability, rehabilitation, and international monitoring. The discussion will explore both the humanitarian consequences for victims and the structural reforms needed to prevent such abuses, aiming to uphold international human rights law across the region.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='hoc'){
+    title.innerText='House of Commons';
+    subtitle.innerText='Addressing NHS Staffing Shortages and Long-Term Workforce Planning';
+    desc.innerText=`The House of Commons will address one of the United Kingdom’s most pressing domestic issues: the staffing crisis in the National Health Service. Chronic shortages of doctors, nurses, and support staff have strained healthcare delivery, leading to longer wait times and declining patient care quality. Workforce planning has lagged behind population growth, demographic change, and the growing demand for healthcare.
+
+Members of Parliament will debate solutions to ensure the NHS has a sustainable workforce for the future. The discussions will encompass immigration policy, training and education, pay and working conditions, and funding models. Long-term reform strategies must balance fiscal realities with the nation’s commitment to universal, high-quality healthcare.`;
+    ropBtn.style.display='inline-block'; // or 'none' if no ROP button
+    ropBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='hunsc'){
+    title.innerText='H:UNSC';
+    subtitle.innerText='The Yugoslav War';
+    desc.innerText=`The Historical United Nations Security Council (UNSC) will revisit the conflicts of the Yugoslav Wars in the 1990s, a series of brutal ethnic conflicts that challenged international peace and security. The war witnessed atrocities including ethnic cleansing, the use of siege warfare, and mass displacement, leading to one of the most severe humanitarian crises in Europe since World War II.
+
+Delegates will assume the roles of Security Council members during the conflict, grappling with urgent decisions on intervention, peacekeeping, and sanctions. The debate will test how effectively the Council can balance sovereignty, humanitarian intervention, and the responsibility to protect in one of the most complex conflicts of modern history.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='hoic'){
+    title.innerText='H:OIC';
+    subtitle.innerText='The 1982 Israeli Invasion of Lebanon and the Problems Faced by the Palestinian People';
+    desc.innerText=`The Historical Organization of Islamic Cooperation (OIC) will deliberate on the 1982 Israeli invasion of Lebanon, a critical moment in Middle Eastern history that deeply affected regional stability and the plight of the Palestinian people. The invasion, launched to weaken the Palestine Liberation Organization (PLO) and assert Israeli control, escalated into a full-scale conflict with devastating humanitarian consequences for both Lebanese civilians and Palestinian refugees.
+
+Delegates will discuss the broader implications of the invasion on the Palestinian struggle for statehood, the role of Arab and Islamic states in addressing displacement and violence, and the search for a unified response within the OIC. The committee will be tasked with navigating sensitive questions of sovereignty, humanitarian relief, and solidarity in the face of ongoing regional tensions.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='hcc'){
+    title.innerText='HCC';
+    subtitle.innerText='1910 Mexican Revolution: The End of Porfirio Díaz Regime';
+    desc.innerText=`The Historical Crisis Committee (HCC) transports delegates to the turbulent period of 1910, when widespread discontent against Porfirio Díaz’s authoritarian rule sparked the Mexican Revolution. With economic inequality, political repression, and lack of land reform fueling revolutionary fervor, Mexico stands at a crossroads between reform and chaos.
+
+Delegates will embody revolutionaries, politicians, landowners, and military leaders as they shape the trajectory of the revolution. The challenge lies in balancing competing interests while navigating shifting alliances and widespread instability, ultimately determining the fate of Díaz’s regime and the future of Mexico.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='hjcc'){
+    title.innerText='H:JCC';
+    subtitle.innerText='The Ottoman–Wallachian Wars';
+    desc.innerText=`The Historical Joint Crisis Committee (HJCC) takes delegates back to the medieval conflicts between the Ottoman Empire and the Principality of Wallachia. These wars, marked by shifting alliances, fierce resistance, and the clash of expanding empires, shaped the balance of power in Eastern Europe. Delegates will represent key figures on both sides, from sultans and generals to local rulers.
+
+The crisis will challenge participants to manage military strategy, diplomacy, and internal factionalism while navigating the realities of 15th-century warfare. The outcome of the conflict and the stability of the region will depend on how effectively delegates balance ambition with survival in this volatile period.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  } else if(committee==='b99'){
+    title.innerText='Brooklyn Nine-Nine';
+    subtitle.innerText='The Halloween Heist';
+    desc.innerText=`In this lighthearted crisis committee, delegates will step into the shoes of characters from the hit show *Brooklyn Nine-Nine*. The agenda centers on the precinct’s legendary Halloween Heist, where detectives and officers compete in a chaotic contest of trickery, betrayal, and wit to claim the title of "Ultimate Detective/Genius."
+
+The cabinet will involve dynamic crisis updates, alliances, and betrayals as delegates strategize to outwit rivals and secure victory. Creativity, humor, and quick thinking will be essential, as the balance of power can shift at any moment during the unpredictable events of the Heist.`;
+    ropBtn.style.display='none'; // or 'none' if no ROP button
+    sgBtn.onclick = () => { window.location.href = 'comingsoon.html'; };
+  }
+
+  setTimeout(()=>{ overlay.classList.add('show'); }, 10);
+}
+
+function closeOverlay(){
+  const overlay = document.getElementById('overlay');
+  overlay.classList.remove('show');
+  setTimeout(()=>{ overlay.style.display='none'; },400);
+}
+</script>
+
+</body>
+</html>

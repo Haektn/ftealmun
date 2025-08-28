@@ -1,68 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coming Soon</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTEALMUN'25</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  padding-top: 80px;
+  font-family: 'Montserrat', sans-serif;
+  color: #eaeaea;
+  background: linear-gradient(rgba(100,0,150,0.2), rgba(100,0,150,0.2)), url('./IMG_7995.JPG') center/cover no-repeat;
+  background-attachment: fixed;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: #d1c3ff; }
 
-    :root { --bg1: #2e003e; --bg2: #4b006e; --fg: #f5f3ff; --accent: #a855f7; }
+/* Fixed Navbar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: #1a0f2b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  flex-wrap: wrap;
+}
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+header .logo img { width: 48px; height: 48px; }
+header .logo span {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #b69df8;
+  letter-spacing: 0.05em;
+}
 
-    html, body { height: 100%; margin: 0; }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100%;
-      background:
-        radial-gradient(1000px 700px at 50% 30%, color-mix(in oklab, var(--accent), transparent 85%), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2) 90%);
-      color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
-      text-align: center;
-    }
+/* Nav Links */
+nav {
+  display: flex;
+  gap: 1rem;
+  margin-right: 0.5rem;
+}
+nav a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+nav a:hover {
+  background-color: rgba(182,157,248,0.2);
+  color: #fff;
+}
 
-    h1 {
-      font-family: 'Bodoni Moda', serif;
-      font-size: clamp(2rem, 6vw, 5rem);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin: 0 0 0.5rem;
-    }
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 2001;
+}
+.hamburger div {
+  height: 3px;
+  border-radius: 2px;
+  background-color: #b69df8;
+  transition: all 0.3s ease;
+}
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    p {
-      margin: 0;
-      opacity: 0.85;
-      font-family: "Times New Roman", Times, serif;
-    }
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(to bottom right, #2b0f45, #3a1a63);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  border: 1px solid #5c4d85;
+  flex-wrap: wrap;
+  max-width: 95%;
+}
+.hero h1, .hero h2 { font-family: 'Playfair Display', serif; }
+.hero h1 { font-size: 3rem; color: #e3d4ff; margin: 0.5rem 0; font-weight: 700; }
+.hero h2 { font-size: 0.875rem; letter-spacing: 0.3em; font-weight: 700; color: #f0eaff; margin: 0; }
+.hero p { margin-top: 0.75rem; font-size: 1.125rem; color: #f5f5f5; }
+.hero .apply-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #7c4dff, #5c6bf3);
+  border: none;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+.hero .apply-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #6a39e6, #4a56d8);
+}
 
-    .dots::after { content: ""; animation: ellipsis steps(4, end) 1.2s infinite; }
-    @keyframes ellipsis {
-      0%, 100% { content: ""; }
-      25% { content: "."; }
-      50% { content: ".."; }
-      75% { content: "..."; }
-    }
+/* Countdown Box */
+.countdown {
+  text-align: center;
+  background: #2b0f45;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 1px solid #5c4d85;
+  margin-top: 1rem;
+}
+.countdown h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c3b3f9; margin-bottom: 1rem; }
+.countdown .timer { display: flex; gap: 1.5rem; font-size: 1rem; justify-content: center; flex-wrap: wrap; }
+.countdown .timer div span {
+  display: block;
+  font-size: 2rem;
+  color: #b69df8;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
 
-    footer {
-      position: fixed;
-      inset-inline: 0;
-      bottom: 1rem;
-      text-align: center;
-      font-size: 0.8rem;
-      opacity: 0.6;
-    }
-  </style>
+/* SG Letter */
+.card {
+  max-width: 65%;
+  margin: 3.5rem auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: linear-gradient(to bottom right, #2c0f3f, #3b1a5d);
+  border: 1px solid #5c4d85;
+  color: #f0f0f0;
+  text-align: justify;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: #e3d4ff;
+  margin-bottom: 1.25rem;
+}
+.card p { margin: 1rem 0; }
+.card .signature { font-style: italic; color: #c3b3f8; font-size: 1.125rem; }
+
+/* Footer */
+footer {
+  background-color: #1a0f2b;
+  color: #dcd6ff;
+  padding: 3rem 1rem 2rem 1rem;
+  text-align: center;
+  margin-top: 5rem;
+}
+footer .footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5rem;
+}
+footer .footer-container div {
+  flex: 1;
+  min-width: 180px;
+}
+footer h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+footer a { color: #b69df8; display: block; margin: 0.5rem 0; transition: all 0.3s ease; text-decoration:none;}
+footer a:hover { color: #fff; }
+footer p.copy { margin-top: 4rem; font-size: 0.9rem; color: #aaa; }
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+  }
+  header .logo { flex: 1; justify-content: flex-start; }
+  header .logo span { position: absolute; left: 50%; transform: translateX(-50%); }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1a0f2b;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1500;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+  nav.show { max-height: 500px; opacity: 1; transform: translateY(0); }
+  nav a { padding: 1rem 0; text-align: center; font-size: 1.1rem; }
+
+  .hamburger { display: flex; }
+
+  .hero { flex-direction: column; margin: 2rem 1rem; padding: 1.5rem; }
+  .hero div:first-child { width: 100%; text-align: center; }
+  .hero .apply-btn { display: block; margin: 1.5rem auto 0 auto; }
+
+  .card { max-width: 90%; padding: 1.5rem; }
+}
+</style>
 </head>
 <body>
-  <main role="main" aria-label="Coming soon">
-    <h1>Coming&nbsp;Soon<span class="dots" aria-hidden="true"></span></h1>
-    <p>Something remarkable is on the way. Stay tuned.</p>
-  </main>
-  <footer>FTEALMUN'25</footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+
+<header>
+  <div class="logo">
+    <img src="./FTEALMUNLOGO.png" alt="FTEALMUN Logo">
+    <span>FTEALMUN'25</span>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <nav id="navbar">
+    <a href="index.html">Home</a>
+    <a href="conference.html">Conference</a>
+    <a href="committees.html">Committees</a>
+    <a href="apply.html">Apply Now</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>FTEALMUN'25</h2>
+    <h1>7 – 9 November 2025</h1>
+    <p>When diplomacy meets fashion.</p>
+    <button class="apply-btn" onclick="window.location.href='apply.html'">
+      Apply Now
+    </button>
+  </div>
+  <div class="countdown">
+    <h2>Countdown</h2>
+    <div class="timer">
+      <div><span id="days">0</span>Days</div>
+      <div><span id="hours">0</span>Hours</div>
+      <div><span id="minutes">0</span>Min</div>
+      <div><span id="seconds">0</span>Sec</div>
+    </div>
+  </div>
+</section>
+
+<div class="card">
+  <h2>Letter from the Co-Secretaries-General</h2>
+  <p>Distinguished Delegates of FTEALMUN'25,</p>
+  <p>
+    It is a great honour to welcome you all to FTEALMUN’25. In an age when global challenges affect each of us more profoundly than ever before, this conference represents far more than a gathering of students. It is a space where young voices can question, connect, and take the first steps toward shaping lasting change. The committees and agendas have been crafted with care, each one designed to spark meaningful dialogue, challenge existing perspectives, and inspire innovative solutions to the world’s most pressing issues.
+  </p>
+  <p>
+    The true strength of FTEALMUN’25 lies in its diversity. Bringing together delegates from different backgrounds and viewpoints, this conference is a reminder that progress stems from the exchange of ideas. It is not only about policies or resolutions but about learning from one another, testing convictions, and building a community where every vision is valued. As you take on the role of diplomats, I encourage you to keep your minds open, to lead with patience and empathy, and to embrace the discomfort that often comes with meaningful negotiation.
+  </p>
+  <p>
+    I hope this experience empowers you to bring your full self into every discussion. Let it be a stepping stone in your journey to becoming thoughtful, forward-looking leaders. Each of you carries a unique perspective, and together you will define the spirit and success of this conference. My team and I are excited to see the passion, creativity, and determination you bring to the table.
+  </p>
+  <p>
+    On behalf of the entire Secretariat, thank you for joining us in this endeavour. May FTEALMUN’25 not only be remembered for its debates but also for the friendships formed, the lessons learned, and the inspiration that stays with us long after the final session concludes.
+  </p>
+  <p class="signature">
+    Warm regards,<br>
+    Haktan Efe Özgür, Ela Çakır<br>
+    Co-Secretaries-General of FTEALMUN’25
+  </p>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="conference.html">Conference</a>
+      <a href="committees.html">Committees</a>
+      <a href="apply.html">Apply Now</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:ftealmunpublicrelations@gmail.com">ftealmunpublicrelations@gmail.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/ftealmun" target="_blank">@ftealmun</a></p>
+    </div>
+  </div>
+  <p class="copy">FTEALMUN'25 © 2025. All Rights Reserved.</p>
+</footer>
+
+
+<script>
+function toggleMenu() {
+  document.getElementById('navbar').classList.toggle('show');
+  document.querySelector('.hamburger').classList.toggle('active');
+}
+
+// Countdown
+window.onload = function() {
+  const targetDate = new Date(2025,10,7,0,0,0).getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if(diff <=0){
+      document.getElementById('days').innerText=0;
+      document.getElementById('hours').innerText=0;
+      document.getElementById('minutes').innerText=0;
+      document.getElementById('seconds').innerText=0;
+      return;
+    }
+    document.getElementById('days').innerText=Math.floor(diff/(1000*60*60*24));
+    document.getElementById('hours').innerText=Math.floor((diff/(1000*60*60))%24);
+    document.getElementById('minutes').innerText=Math.floor((diff/(1000*60))%60);
+    document.getElementById('seconds').innerText=Math.floor((diff/1000)%60);
+  }
+  setInterval(updateCountdown,1000);
+  updateCountdown();
+};
+
+// Tween-like smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(!target) return;
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start - 70;
+    const distance = end - start;
+    const duration = 1200;
+    let startTime = null;
+    function animate(time){
+      if(!startTime) startTime = time;
+      const elapsed = time - startTime;
+      const t = Math.min(elapsed/duration,1);
+      const ease = t<0.5 ? 2*t*t : -1+(4-2*t)*t;
+      window.scrollTo(0, start + distance * ease);
+      if(elapsed < duration) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  });
+});
+</script>
 </body>
 </html>
